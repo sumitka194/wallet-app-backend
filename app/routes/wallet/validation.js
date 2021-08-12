@@ -1,11 +1,15 @@
+import httpStatus from 'http-status';
+
+import ApiError from '../../helpers/ApiError';
+
 export default {
   setup: (req, res, next) => {
     const { balance, name } = req?.body;
     if (!balance || !name) {
-      next('balance and name are required');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'balance and name are required'));
     }
     if (typeof balance !== 'number') {
-      next('balance should be a valid number');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'balance should be a valid number'));
     }
     next();
   },
@@ -14,10 +18,10 @@ export default {
     const { walletId } = req?.params;
     const { amount } = req?.body;
     if (!walletId) {
-      next('walletId is required');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }
     if (typeof amount !== 'number') {
-      next('amount should be a valid number');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'amount should be a valid number'));
     }
     next();
   },
@@ -25,10 +29,10 @@ export default {
   getTransactions: (req, res, next) => {
     const { walletId, skip, limit } = req?.query;
     if (!walletId) {
-      next('walletId is required');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }
     if (typeof skip !== 'number' || typeof limit !== 'number') {
-      next('skip or limit should be valid number');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'skip or limit should be valid number'));
     }
     next();
   },
@@ -36,7 +40,7 @@ export default {
   getWalletDetails: (req, res, next) => {
     const { id } = req?.params;
     if (!id) {
-      next('walletId is required');
+      next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }
     next();
   },
