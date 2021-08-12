@@ -27,11 +27,20 @@ export default {
   },
 
   getTransactions: (req, res, next) => {
-    const { walletId, skip, limit } = req?.query;
+    const {
+      walletId, skip, limit, sortByDate, sortByAmount,
+    } = req?.query;
     if (!walletId) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }
-    if (typeof skip !== 'number' || typeof limit !== 'number') {
+    if (sortByDate && sortByDate !== 'asc' && sortByDate !== 'desc') {
+      next(new ApiError(httpStatus.BAD_REQUEST, 'sortByDate should be either asc or desc'));
+    }
+    if (sortByAmount && sortByAmount !== 'asc' && sortByAmount !== 'desc') {
+      next(new ApiError(httpStatus.BAD_REQUEST, 'sortByAmount should be either asc or desc'));
+    }
+    // eslint-disable-next-line no-restricted-globals
+    if (isNaN(skip) || isNaN(limit)) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'skip or limit should be valid number'));
     }
     next();

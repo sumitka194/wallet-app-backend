@@ -9,7 +9,7 @@ router.post('/setup', validation.setup, walletController.setup);
 
 router.post('/transact/:walletId', validation.updateWallet, walletController.updateWallet);
 
-router.get('/transaction', validation.getTransactions, walletController.getTransactions);
+router.get('/transactions', validation.getTransactions, walletController.getTransactions);
 
 router.get('/wallet/:id', validation.getWalletDetails, walletController.getWalletDetails);
 
