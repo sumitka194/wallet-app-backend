@@ -40,7 +40,7 @@ export default {
       next(new ApiError(httpStatus.BAD_REQUEST, 'sortByAmount should be either asc or desc'));
     }
     // eslint-disable-next-line no-restricted-globals
-    if (isNaN(skip) || isNaN(limit)) {
+    if ((skip && isNaN(skip)) || (limit && isNaN(limit))) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'skip or limit should be valid number'));
     }
     next();

@@ -49,7 +49,7 @@ export default {
       walletId, skip, limit, sortByDate, sortByAmount,
     } = req.query;
     const numSkip = Number(skip);
-    const numLimit = Number(limit);
+    const numLimit = Number(limit) || 10;
     const sort = {};
     if (sortByDate) {
       sort.date = sortByDate === 'asc' ? 1 : -1;
