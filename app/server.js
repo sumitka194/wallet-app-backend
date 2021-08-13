@@ -24,7 +24,6 @@ app.use(express.json());
 app.use(cors());
 app.use(mongoSanitize());
 
-app.use(express.static('log'));
 app.use(`${config.swaggerConfig.swaggerURL}.json`, swaggerDocRouter);
 app.use(config.swaggerConfig.swaggerURL, serve, setup);
 app.use(router);

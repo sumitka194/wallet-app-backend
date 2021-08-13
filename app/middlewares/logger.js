@@ -7,8 +7,7 @@ const logger = winston.createLogger({
   format: winston.format.json(),
   defaultMeta: { service: 'wallet-service' },
   transports: [
-    new winston.transports.File({ filename: 'log/error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'log/combined.log', level: 'info' }),
+    new winston.transports.Console(),
   ],
 });
 
