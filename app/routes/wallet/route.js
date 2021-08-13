@@ -39,7 +39,7 @@ router.post('/setup', validation.setup, walletController.setup);
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: id
+ *       - name: walletId
  *         description: wallet id
  *         in: path
  *         required: true
