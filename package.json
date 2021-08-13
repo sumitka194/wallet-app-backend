@@ -4,9 +4,11 @@
   "description": "Wallet Application to manage multiple wallets with balance and transaction",
   "main": "app/server.js",
   "scripts": {
-    "start": "babel-node app/server.js",
+    "dev": "babel-node app/server.js",
     "prebuild": "rm -rf build",
     "build": "babel app -d build",
+    "prestart": "npm run build",
+    "start": "node build/server.js",
     "run:prod": "npm run build && node build/server.js",
     "lint": "eslint app",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -48,5 +50,8 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
