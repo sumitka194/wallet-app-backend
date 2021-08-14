@@ -43,7 +43,6 @@ const transactionSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   type: {
     type: String,
@@ -52,7 +51,7 @@ const transactionSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 

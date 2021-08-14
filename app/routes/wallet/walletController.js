@@ -30,7 +30,7 @@ export default {
   updateWallet: createAsycController(async (req, res) => {
     const { amount, description } = req.body;
     const { walletId } = req.params;
-    const wallet = await updateWallet(walletId, { amount });
+    const wallet = await updateWallet(walletId, { amount: amount.toFixed(4) });
     const { balance } = wallet;
     const transaction = await createTransaction({
       walletId,

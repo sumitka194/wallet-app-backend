@@ -14,7 +14,7 @@ export const updateWallet = async (id, { amount }) => {
   }
   const { balance } = wallet;
   const newBalance = balance + amount;
-  Object.assign(wallet, { balance: newBalance });
+  Object.assign(wallet, { balance: newBalance.toFixed(4) });
   wallet.save();
   return wallet;
 };
