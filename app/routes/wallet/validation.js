@@ -4,7 +4,7 @@ import ApiError from '../../helpers/ApiError';
 
 export default {
   setup: (req, res, next) => {
-    const { balance, name } = req?.body;
+    const { balance, name } = req?.body || {};
     if (!balance || !name) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'balance and name are required'));
     }
@@ -15,8 +15,8 @@ export default {
   },
 
   updateWallet: (req, res, next) => {
-    const { walletId } = req?.params;
-    const { amount } = req?.body;
+    const { walletId } = req?.params || {};
+    const { amount } = req?.body || {};
     if (!walletId) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }
@@ -29,7 +29,7 @@ export default {
   getTransactions: (req, res, next) => {
     const {
       walletId, skip, limit, sortByDate, sortByAmount,
-    } = req?.query;
+    } = req?.query || {};
     if (!walletId) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }
@@ -39,7 +39,6 @@ export default {
     if (sortByAmount && sortByAmount !== 'asc' && sortByAmount !== 'desc') {
       next(new ApiError(httpStatus.BAD_REQUEST, 'sortByAmount should be either asc or desc'));
     }
-    // eslint-disable-next-line no-restricted-globals
     if ((skip && isNaN(skip)) || (limit && isNaN(limit))) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'skip or limit should be valid number'));
     }
@@ -47,7 +46,7 @@ export default {
   },
 
   getWalletDetails: (req, res, next) => {
-    const { id } = req?.params;
+    const { id } = req?.params || {};
     if (!id) {
       next(new ApiError(httpStatus.BAD_REQUEST, 'walletId is required'));
     }

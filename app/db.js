@@ -3,19 +3,17 @@ import config from './config';
 
 const { mongoURI } = config;
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
-
 function connectDB() {
   return new Promise((resolve, reject) => {
-    mongoose.connect(mongoURI, options, (err) => {
-      if (err) {
+    mongoose.connect(mongoURI)
+      .then(() => {
+        console.log(`Connected to database: ${mongoURI}`);
+        resolve();
+      })
+      .catch((err) => {
+        console.error(`Error connecting to database: ${mongoURI}`, err);
         reject(err);
-      }
-      resolve();
-    });
+      });
 
     mongoose.connection.on('error', () => {
       throw new Error(`unable to connect to database: ${mongoURI}`);
